@@ -1,17 +1,33 @@
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
+import java.io.*;
+import java.util.*;
+import java.util.Arrays;
+import java.util.Scanner;
+import java.util.InputMismatchException;
+
 public class Main {
-    public static void main(String[] args) {
-        // Press Alt+Enter with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+    public static void main(String[] args) throws IOException {
 
-        // Press Shift+F10 or click the green arrow button in the gutter to run the code.
-        for (int i = 1; i <= 5; i++) {
+        System.out.println(" ");
+        System.out.println("Имеются три цветка в следующей изначальной последовательности слева-направо: Герань ('G'), Крокус ('C'), Фиалка ('V')");
 
-            // Press Shift+F9 to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Ctrl+F8.
-            System.out.println("i = " + i);
-        }
+        try{
+            ArrayDeque<String> row = new ArrayDeque<>(Arrays.asList("G", "C", "V"));
+            StringBuilder res = null;
+
+            int knumber;
+            Scanner sc = new Scanner(new File("k.txt"));
+            knumber = Integer.valueOf(sc.nextInt());
+            for(int i = 0; i < knumber; i++){row.addFirst(row.getLast()); row.removeLast();}
+
+            for(String flowers: row){if(res != null){
+                res.append(" " + flowers);
+            }else{
+                res = new StringBuilder(flowers);
+            }
+            }
+            System.out.println(" ");
+            System.out.println("По истечении указанного в исходном файле числа дней цветы стоят в следующей последовательности: " + res + ".");
+
+        } catch (FileNotFoundException e){System.out.println("Ой!");}
     }
 }
